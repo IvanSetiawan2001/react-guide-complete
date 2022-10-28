@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Card from "../UI/Card";
 import ExpenseDate from "./ExpenseDate";
-import ExpensesFilter from "./ExpenseFilter";
 import "./ExpenseItem.css";
 
 const ExpenseItem = (props) => {
@@ -14,7 +13,6 @@ const ExpenseItem = (props) => {
 
   return (
     <div>
-      <ExpensesFilter></ExpensesFilter>
       <Card className="expense-item">
         <ExpenseDate date={props.date} />
         <div className="expense-item__description">

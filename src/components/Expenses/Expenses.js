@@ -1,10 +1,19 @@
 import Card from "../UI/Card";
 import ExpenseItem from "./ExpenseItem";
 import "./Expenses.css";
+import React, { useState } from "react";
+import ExpensesFilter from "./ExpensesFilter";
 
 const Expenses = (expenses) => {
+  const [year, enteredSelectedYear] = useState("2020");
+
+  const savedDropdownChange = (selectedYear) => {
+    enteredSelectedYear(selectedYear);
+  };
+
   return (
     <Card className="expenses">
+      <ExpensesFilter selected={year} onDropdownChange={savedDropdownChange} />
       <ExpenseItem
         title={expenses.props[0].title}
         amount={expenses.props[0].amount}
