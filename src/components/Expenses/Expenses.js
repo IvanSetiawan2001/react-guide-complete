@@ -11,10 +11,14 @@ const Expenses = (expenses) => {
     enteredSelectedYear(selectedYear);
   };
 
+  const filteredExpenses = expenses.props.filter((expense) => {
+    return expense.date.getFullYear().toString() === year;
+  });
+
   return (
     <Card className="expenses">
       <ExpensesFilter selected={year} onDropdownChange={savedDropdownChange} />
-      {expenses.props.map((expense) => (
+      {filteredExpenses.map((expense) => (
         <ExpenseItem
           key={expense.id}
           title={expense.title}
