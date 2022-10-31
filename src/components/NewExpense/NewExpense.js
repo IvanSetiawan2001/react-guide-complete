@@ -1,34 +1,39 @@
 import { useState } from "react";
-import AddNewData from "./AddNewData";
 import ExpenseForm from "./ExpensesForm";
 import "./NewExpenses.css";
 
 const NewExpenses = (props) => {
-  const [pointer, newPointer] = useState(0);
-
+  const [isEditing, setIsEditing] = useState(false);
   const saveExpesenseDataHandler = (enteredExpenseData) => {
     const expenseData = {
       ...enteredExpenseData,
       id: Math.random().toString,
     };
     props.onAddExpense(expenseData);
+    setIsEditing(false);
   };
 
-  const changePointer = (sendback) => {
-    newPointer(sendback);
+  const startEditingHandler = () => {
+    setIsEditing(true);
   };
 
-  let expenseForm = <AddNewData onCancelClicked={changePointer} />;
-  if (pointer === 1) {
-    expenseForm = (
-      <ExpenseForm
-        onSaveExpenseData={saveExpesenseDataHandler}
-        onCancelClicked={changePointer}
-      />
-    );
-  }
+  const stopEditingHandler = () => {
+    setIsEditing(false);
+  };
 
-  return <div className="new-expense">{expenseForm}</div>;
+  return (
+    <div className="new-expense">
+      {!isEditing && (
+        <button onClick={startEditingHandler}>Add New Expense</button>
+      )}
+      {isEditing && (
+        <ExpenseForm
+          onSaveExpenseData={saveExpesenseDataHandler}
+          onCancel={stopEditingHandler}
+        />
+      )}
+    </div>
+  );
 };
 
 export default NewExpenses;
