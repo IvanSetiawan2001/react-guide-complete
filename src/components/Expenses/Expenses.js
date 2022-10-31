@@ -16,7 +16,7 @@ const Expenses = (expenses) => {
       <ExpensesFilter selected={year} onDropdownChange={savedDropdownChange} />
       {expenses.props.map((expense) => (
         <ExpenseItem
-          tittle={expense.title}
+          title={expense.title}
           amount={expense.amount}
           date={expense.date}
         />
