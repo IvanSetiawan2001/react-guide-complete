@@ -15,21 +15,23 @@ const Expenses = (expenses) => {
     return expense.date.getFullYear().toString() === year;
   });
 
+  let expensesContent = <p>there is no item </p>;
+
+  if (filteredExpenses.length > 0) {
+    expensesContent = filteredExpenses.map((expense) => (
+      <ExpenseItem
+        key={expense.id}
+        title={expense.title}
+        amount={expense.amount}
+        date={expense.date}
+      />
+    ));
+  }
+
   return (
     <Card className="expenses">
       <ExpensesFilter selected={year} onDropdownChange={savedDropdownChange} />
-      {filteredExpenses.length === 0 ? (
-        <p>there is no item </p>
-      ) : (
-        filteredExpenses.map((expense) => (
-          <ExpenseItem
-            key={expense.id}
-            title={expense.title}
-            amount={expense.amount}
-            date={expense.date}
-          />
-        ))
-      )}
+      {expensesContent}
     </Card>
   );
 };
