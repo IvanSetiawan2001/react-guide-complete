@@ -18,14 +18,17 @@ const Expenses = (expenses) => {
   return (
     <Card className="expenses">
       <ExpensesFilter selected={year} onDropdownChange={savedDropdownChange} />
-      {filteredExpenses.map((expense) => (
-        <ExpenseItem
-          key={expense.id}
-          title={expense.title}
-          amount={expense.amount}
-          date={expense.date}
-        />
-      ))}
+      {/* dalam "{}" syntax yang berada di kanan && akan dianggap sebagai hasil yang diinginkan ketika kondisi nya */}
+      {filteredExpenses.length === 0 && <p>there is no item </p>}
+      {filteredExpenses.length > 0 &&
+        filteredExpenses.map((expense) => (
+          <ExpenseItem
+            key={expense.id}
+            title={expense.title}
+            amount={expense.amount}
+            date={expense.date}
+          />
+        ))}
     </Card>
   );
 };
